@@ -1,0 +1,22 @@
+# primero
+---
+- hosts: "{{ hosts }}"
+  become: true
+  tasks:
+    - name: insatalamos apache
+      package:
+        name: httpd
+        state: latest
+    - name: levantar servicio httpd y persistente
+      service: 
+        name: httpd
+        state: started
+        enabled: yes 
+    - name: creamos index.html
+      file:
+        path: /var/www/html/index.html
+        state: touch
+    - name: añadioms contenido a index
+      copy:
+        content: "Hello Word"
+        dest: /var/www/html/index.html
