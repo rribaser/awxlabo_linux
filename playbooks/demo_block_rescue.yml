@@ -1,0 +1,18 @@
+---
+- hosts: "{{ hosts }}"
+  become: true
+  tasks:
+    - name: validar apache
+      block: # puede ser uno o varios modulos
+      - uri:
+          url: "http://{{ hosts }}"
+      rescue: # si falla lo de arriba se ejecuta esto
+       # - debug:
+       #     msg: "Debes levantar apache"
+        - service:
+            name: httpd
+            state: started
+      always:
+        - debug:
+            msg: "Siempre ejecuto esto"
+       

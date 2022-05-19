@@ -1,0 +1,17 @@
+---
+- hosts: "{{ hosts }}"
+  become: true
+  tasks:
+    - name: copi fichero
+#
+     #   owner: sgarrido
+     #   group: sgarrido
+     #   mode: '0644'
+     #   remote_src: no # opcion no es por defecto si se ha de mover dentro del servidor destino pones yes
+      template: 
+        src: /var/tmp/linux_file.conf.j2
+        dest: /var/tmp/file.conf
+        owner: root
+        group: root
+        mode: '0644'
+

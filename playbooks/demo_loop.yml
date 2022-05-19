@@ -1,0 +1,22 @@
+---
+- hosts: "{{ hosts }}"
+  become: true # para ejecutar como root
+  tasks:
+    - name : creamos usuarios
+      user: # nombre del modulo
+        name : "{{ item }}" # esta variable solo es para este modulo y coge valores del with_items.
+        shell: /bin/bash
+        comment: "usuario creado por ansible"
+        state: present
+      with_items:
+        - rlujan
+        - dbolivar
+        - aitolive
+    - name : creamos usaurios
+      debug:
+        msg: "usuario {{ item.usario }} y con grupo {{ item.group }}"
+      with_items:
+       - { usario: 'rlujan', group: 'unix'}
+       - { usario: 'dbolivar', group: 'db'}
+      tags: prueba
+    

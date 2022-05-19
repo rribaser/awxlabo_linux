@@ -7,17 +7,25 @@
       package:
         name: httpd
         state: latest
+      tags: install
     - name: levantar servicio httpd y persistente
       service: 
         name: httpd
-        # state: started
-        state: stopped
+        state: started
         enabled: yes 
+      tags: config
     - name: creamos index.html
       file:
         path: /var/www/html/index.html
         state: touch
+      tags: config
     - name: añadioms contenido a index
       copy:
         content: "Hello Word"
         dest: /var/www/html/index.html
+      tags: config
+    - name: desinstalar apache
+      package:
+        name: httpd
+        state: absent
+      tags: never,uninstall

@@ -1,0 +1,10 @@
+---
+- hosts: "{{ hosts }}"
+  become: true
+  tasks:
+    - name: create dir /var/tmp/prueba_when
+      file: 
+        path: /var/tmp/prueba_when_123
+        state: directory
+        # creamos el directorio si la ip es la indicada
+      when: ansible_default_ipv4.address == "192.168.17.108"

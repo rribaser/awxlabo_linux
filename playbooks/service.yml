@@ -1,0 +1,8 @@
+---
+- hosts: "{{ hosts }}"
+  become: true
+  tasks:
+    - name: paramos servicio
+      service:
+        name: "{{ servicio }}"
+        state: "{{ accion }}"
