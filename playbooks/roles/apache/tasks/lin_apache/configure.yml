@@ -1,0 +1,14 @@
+---
+- name: configuramos apache
+  copy:
+    src: httpd.conf.sgarrido
+    dest: /etc/httpd/conf/httpd.conf
+  notify:
+   - restart sgarridohttpd service
+
+- name: confi pagina
+  copy:
+    src: index.html.sgarrido
+    dest: /var/www/html/index.html
+  notify: 
+   - restart sgarridohttpd service 
